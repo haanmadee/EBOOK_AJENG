@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* --- CSS UTAMA --- */
+  :root {
+    --primary-blue: #18375d;
+    --accent-yellow: #ffaf00;
+    --bg-white: #f6fafd;
+    --text-dark: #18375d;
+    --text-grey: #556987;
+  }
+
+  .webook-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-white);
+    padding: 40px 20px;
+    border-radius: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden; 
+  }
+
+  /* --- KOLOM KIRI (TEKS) --- */
+  .left-content {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    color: var(--primary-blue);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+  }
+  
+  .badge span {
+    color: var(--accent-yellow);
+    margin-right: 8px;
+    font-size: 1.2rem;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    color: var(--primary-blue);
+    margin: 0 0 20px 0;
+    font-weight: 800;
+  }
+
+  p.description {
+    color: var(--text-grey);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-size: 1rem;
+  }
+
+  /* Tombol & Link */
+  .cta-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-blue);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(24, 55, 93, 0.3);
+  }
+
+  .link-secondary {
+    color: var(--text-dark);
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Social Proof */
+  .social-proof {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .avatars {
+    display: flex;
+  }
+
+  .avatars img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-left: -10px;
+    object-fit: cover;
+  }
+  
+  .avatars img:first-child { margin-left: 0; }
+  
+  .rating-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -10px;
+    border: 2px solid #fff;
+    color: var(--primary-blue);
+    font-weight: bold;
+    font-size: 0.8rem;
+    z-index: 2;
+  }
+
+  .rating-text {
+    font-size: 0.9rem;
+    color: var(--primary-blue);
+    font-weight: 700;
+  }
+  
+  .rating-sub {
+    font-size: 0.8rem;
+    color: var(--text-grey);
+    font-weight: 400;
+    display: block;
+  }
+
+  /* --- KOLOM KANAN (SLIDER GAMBAR) --- */
+  .right-visual {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+    max-width: 100%; 
+  }
+
+  .slider-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    padding-right: 20px; 
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .slider-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide-item {
+    scroll-snap-align: start;
+    flex: 0 0 auto;
+    width: 280px;  
+    height: 280px;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  
+  .slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Tombol Navigasi Slider (Panah) */
+  .nav-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.2s;
+  }
+
+  .btn-prev {
+    background-color: var(--primary-blue);
+    color: #fff;
+  }
+
+  .btn-next {
+    background-color: var(--accent-yellow);
+    color: var(--primary-blue);
+  }
+
+  .nav-btn:active {
+    transform: scale(0.9);
+  }
+
+  /* --- RESPONSIVE MOBILE (Revisi Tampilan 1.5 Gambar) --- */
+  @media (max-width: 768px) {
+    .webook-container {
+      flex-direction: column;
+      padding: 30px 20px;
+      gap: 30px;
+    }
+
+    h1 { font-size: 2rem; }
+    
+    .left-content, .right-visual {
+      width: 100%;
+      min-width: 100%;
+    }
+    
+    /* Revisi: Menampilkan 1.5 gambar di HP */
+    .slide-item {
+      /* Mengambil sekitar 60% dari lebar parent untuk membuat gambar ke-2 mengintip */
+      width: 60vw; 
+      height: 60vw;
+    }
+    
+    /* Padding di wrapper slider dikurangi/diatur ulang agar lebih pas di mobile */
+    .slider-wrapper {
+        padding-left: 20px; /* Jaga padding kiri */
+        padding-right: 20px; /* Jaga padding kanan */
+        box-sizing: content-box;
+        margin-left: -20px; /* Tarik slider ke kiri agar gambar full di pinggir */
+        width: calc(100% + 40px); /* Lebar slider + margin yang ditarik */
+    }
+    
+    /* Atur ulang gap agar geseran lebih natural */
+    .slide-item:first-child {
+        margin-left: 20px; /* Tambahkan margin agar gambar pertama tidak mentok */
+    }
+    
+    .nav-controls {
+        margin-left: 20px; /* Posisikan panah agar sejajar dengan konten teks */
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="webook-container">
+  
+  <div class="left-content">
+    <div class="badge">
+      <span>★</span> New Year Special — Diskon 12% Untuk WeBook
+    </div>
+    
+    <h1>Your Remote Career Starts Here!</h1>
+    
+    <p class="description">
+      Ebook praktis berbasis pengalaman nyata, format Notion yang gampang diakses, update gratis seumur hidup, step-by-step sampai landing remote job. Plus akses grup eksklusif, sharing session & webinar rutin, semuanya FREE.
+    </p>
+    
+    <div class="cta-group">
+      <a href="https://lynk.id/ajengwahys/3vndxok5q8gz" class="btn-primary" target="_blank">Beli Sekarang &rarr;</a>
+      <a href="https://wa.link/g340vm" class="link-secondary" target="_blank">Contact Me</a>
+    </div>
+    
+    <div class="social-proof">
+      <div class="avatars">
+        <img src="https://images.pexels.com/photos/14661/pexels-photo-14661.jpeg" alt="User">
+        <img src="https://i.pravatar.cc/100?img=5" alt="User">
+        <img src="https://images.pexels.com/photos/41539/attractive-beautiful-brunette-cute-41539.jpeg" alt="User">
+        <div class="rating-badge">+</div>
+      </div>
+      <div class="rating-info">
+        <div class="rating-text">4.9 Ratings</div>
+        <span class="rating-sub">Dibeli >1000 orang di Indonesia</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-visual">
+    <div class="slider-wrapper" id="slider">
+      
+      <div class="slide-item">
+        <img src="https://cdn.lynkid.my.id/draft-products/11-12-2025/1765457216328_6188002.png" alt="Cover Ebook">
+      </div>
+      
+      <div class="slide-item">
+        <img src="https://cdn.lynkid.my.id/draft-products/11-12-2025/1765457291678_9158129.png" alt="Daftar Isi">
+      </div>
+      
+      <div class="slide-item">
+        <img src="https://cdn.lynkid.my.id/draft-products/11-12-2025/1765457345417_9059873.png" alt="Preview Bab">
+      </div>
+      
+      <div class="slide-item">
+        <img src="https://cdn.lynkid.my.id/draft-products/11-12-2025/1765457216328_6188002.png" alt="Ulang Cover">
+      </div>
+
+    </div>
+
+    <div class="nav-controls">
+      <button class="nav-btn btn-prev" onclick="moveSlide(-1)">&#8592;</button>
+      <button class="nav-btn btn-next" onclick="moveSlide(1)">&#8594;</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Script sederhana untuk fungsi geser panah (jarak geser disesuaikan dengan 1.5 gambar)
+  function moveSlide(direction) {
+    const slider = document.getElementById('slider');
+    // Di mobile, 1 gambar sekitar 60vw, kita geser 65vw untuk mencakup gap 
+    const scrollAmount = window.innerWidth > 768 ? 300 : window.innerWidth * 0.65; 
+    
+    if (direction === 1) {
+      slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    } else {
+      slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    }
+  }
+</script>
+
+</body>
+</html>
